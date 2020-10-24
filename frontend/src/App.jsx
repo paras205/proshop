@@ -5,6 +5,8 @@ import { Container } from "react-bootstrap";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+import LoginPage from "./screens/Login";
+
 import HomePage from "./screens/Home";
 import ProductPage from "./screens/Product";
 import CartPage from "./screens/Cart";
@@ -16,9 +18,10 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Switch>
-            <Route path="/" exact component={HomePage} />
+            <Route path="/login" component={LoginPage} />
             <Route path="/product/:id" component={ProductPage} />
             <Route path="/cart/:id?" component={CartPage} />
+            <Route path="/" exact component={HomePage} />
           </Switch>
         </Container>
       </main>
