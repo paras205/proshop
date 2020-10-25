@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import LoginPage from "./screens/Login";
+import RegisterPage from "./screens/Register";
+import ProfilePage from "./screens/Profile";
 
 import HomePage from "./screens/Home";
 import ProductPage from "./screens/Product";
@@ -18,7 +20,9 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Switch>
+            <Route path="/register" component={RegisterPage} />
             <Route path="/login" component={LoginPage} />
+            <Route path="/profile" component={ProfilePage} />
             <Route path="/product/:id" component={ProductPage} />
             <Route path="/cart/:id?" component={CartPage} />
             <Route path="/" exact component={HomePage} />
