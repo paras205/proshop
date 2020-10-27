@@ -39,8 +39,8 @@ const orderSchema = new mongoose.Schema(
       }
     },
     paymentMethod: {
-      type: Boolean,
-      default: false
+      type: String,
+      required: true
     },
     paymentResult: {
       id: { type: String },

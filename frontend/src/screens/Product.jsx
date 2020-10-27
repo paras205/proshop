@@ -19,10 +19,11 @@ import Message from "../components/Message";
 const Product = ({ match, history }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
-  const productDetail = useSelector(state => state.productDetail);
+  const productDetail = useSelector((state) => state.productDetail);
   const { product, loading, error } = productDetail;
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
+    // eslint-disable-next-line
   }, [dispatch]);
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?quantity=${quantity}`);
@@ -81,9 +82,9 @@ const Product = ({ match, history }) => {
                         <Form.Control
                           as="select"
                           value={quantity}
-                          onChange={e => setQuantity(e.target.value)}
+                          onChange={(e) => setQuantity(e.target.value)}
                         >
-                          {[...Array(product.countInStock).keys()].map(x => (
+                          {[...Array(product.countInStock).keys()].map((x) => (
                             <option key={x + 1} value={x + 1}>
                               {x + 1}
                             </option>
