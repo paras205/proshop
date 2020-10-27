@@ -12,6 +12,9 @@ import ProfilePage from "./screens/Profile";
 import HomePage from "./screens/Home";
 import ProductPage from "./screens/Product";
 import CartPage from "./screens/Cart";
+import CheckoutPage from "./screens/Checkout";
+import PaymentPage from "./screens/Payment";
+import PlaceOrderPage from "./screens/PlaceOrder";
 
 const App = () => {
   return (
@@ -25,6 +28,9 @@ const App = () => {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/product/:id" component={ProductPage} />
             <Route path="/cart/:id?" component={CartPage} />
+            <Route path="/shipping" component={CheckoutPage} />
+            <Route path="/payment" component={PaymentPage} />
+            <Route path="/placeorder" component={PlaceOrderPage} />
             <Route path="/" exact component={HomePage} />
           </Switch>
         </Container>

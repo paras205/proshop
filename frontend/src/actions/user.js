@@ -15,7 +15,7 @@ import {
   USER_LOGOUT
 } from "../constants/user";
 
-export const login = (email, password) => async dispatch => {
+export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
     const config = {
@@ -44,14 +44,7 @@ export const login = (email, password) => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => {
-  localStorage.removeItem("userInfo");
-  dispatch({
-    type: USER_LOGOUT
-  });
-};
-
-export const register = (name, email, password) => async dispatch => {
+export const register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
     const config = {
@@ -82,7 +75,7 @@ export const register = (name, email, password) => async dispatch => {
   }
 };
 
-export const getUserDetails = id => async (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAIL_REQUEST });
     const {
@@ -110,7 +103,7 @@ export const getUserDetails = id => async (dispatch, getState) => {
   }
 };
 
-export const updateUserProfile = user => async (dispatch, getState) => {
+export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
     const {
@@ -137,4 +130,11 @@ export const updateUserProfile = user => async (dispatch, getState) => {
           : error.message
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch({
+    type: USER_LOGOUT
+  });
 };
