@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { PayPalButton } from "react-paypal-button-v2";
+import KhaltiCheckout from "khalti-checkout-web";
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -51,6 +52,58 @@ const Order = ({ match }) => {
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(match.params.id, paymentResult));
+  };
+  let config = {
+    // replace this key with yours
+    publicKey: "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+    productIdentity: "1234567890",
+    productName: "Drogon",
+    productUrl: "http://gameofthrones.com/buy/Dragons",
+    eventHandler: {
+      onSuccess(payload) {
+        console.log(payload);
+      },
+      onError(error) {
+        console.log(error);
+      },
+      onClose() {
+        console.log("widget is closing");
+      }
+    },
+    paymentPreference: [
+      "KHALTI",
+      "EBANKING",
+      "MOBILE_BANKING",
+      "CONNECT_IPS",
+      "SCT"
+    ]
+  };
+  let checkout = new KhaltiCheckout(config);
+  var params = {
+    amt: order && order.totalPrice,
+    psc: 0,
+    pdc: 0,
+    txAmt: 0,
+    tAmt: order && order.totalPrice,
+    pid: "ee2c3ca1-696b-4cc5-a6be-2c40d929d453",
+    scd: "epay_payment",
+    su: "http://merchant.com.np/page/esewa_payment_success",
+    fu: "http://merchant.com.np/page/esewa_payment_failed"
+  };
+
+  const post = async () => {
+    var form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("action", "https://uat.esewa.com.np/epay/main");
+    for (var key in params) {
+      var hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+      hiddenField.setAttribute("value", params[key]);
+      form.appendChild(hiddenField);
+    }
+    document.body.appendChild(form);
+    form.submit();
   };
   return loading ? (
     <Loader />
@@ -173,6 +226,16 @@ const Order = ({ match }) => {
                   )}
                 </ListGroup.Item>
               )}
+              <ListGroup.Item>
+                <button
+                  onClick={() =>
+                    checkout.show({ amount: order.totalPrice * 100 })
+                  }
+                >
+                  Pay with khalti
+                </button>
+                <button onClick={post}>Pay with eSewa</button>
+              </ListGroup.Item>
             </ListGroup>
           </Card>
         </Col>
