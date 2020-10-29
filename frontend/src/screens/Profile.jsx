@@ -13,11 +13,11 @@ const Profile = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
-  const userDetail = useSelector(state => state.userDetail);
+  const userDetail = useSelector((state) => state.userDetail);
   const { loading, error, user } = userDetail;
-  const userLogin = useSelector(state => state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const updateProfile = useSelector(state => state.updateProfile);
+  const updateProfile = useSelector((state) => state.updateProfile);
   const { success } = updateProfile;
   useEffect(() => {
     if (!userInfo) {
@@ -31,7 +31,7 @@ const Profile = ({ history }) => {
       }
     }
   }, [history, userInfo, dispatch, user]);
-  const submitHanlder = e => {
+  const submitHanlder = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Password do not match");
@@ -54,7 +54,7 @@ const Profile = ({ history }) => {
               type="text"
               placeholder="Enter Name"
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
           <Form.Group controlId="email">
@@ -63,7 +63,7 @@ const Profile = ({ history }) => {
               type="email"
               placeholder="Enter email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
           <Form.Group controlId="password">
@@ -72,7 +72,7 @@ const Profile = ({ history }) => {
               type="password"
               placeholder="Enter password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <Form.Group controlId="confirmPassword">
@@ -81,7 +81,7 @@ const Profile = ({ history }) => {
               type="password"
               placeholder="Confirm password"
               value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
           <Button type="submit" variant="primary">

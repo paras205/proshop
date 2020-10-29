@@ -16,6 +16,7 @@ import CheckoutPage from "./screens/Checkout";
 import PaymentPage from "./screens/Payment";
 import PlaceOrderPage from "./screens/PlaceOrder";
 import OrderPage from "./screens/Order";
+import UserPage from "./screens/User";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/shipping" component={CheckoutPage} />
             <Route path="/payment" component={PaymentPage} />
             <Route path="/placeorder" component={PlaceOrderPage} />
+            <Route path="/admin/users" component={UserPage} />
             <Route path="/" exact component={HomePage} />
           </Switch>
         </Container>

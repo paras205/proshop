@@ -54,7 +54,7 @@ const Order = ({ match }) => {
     dispatch(payOrder(match.params.id, paymentResult));
   };
   let config = {
-    // replace this key with yours
+    // replace this publicKey key with yours
     publicKey: "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
     productIdentity: "1234567890",
     productName: "Drogon",
@@ -80,17 +80,17 @@ const Order = ({ match }) => {
   };
   let checkout = new KhaltiCheckout(config);
   var params = {
-    amt: order && order.totalPrice,
+    amt: 100,
     psc: 0,
     pdc: 0,
     txAmt: 0,
-    tAmt: order && order.totalPrice,
+    tAmt: 100,
     pid: "ee2c3ca1-696b-4cc5-a6be-2c40d929d453",
+    // replace this scd key with yours
     scd: "epay_payment",
     su: "http://merchant.com.np/page/esewa_payment_success",
     fu: "http://merchant.com.np/page/esewa_payment_failed"
   };
-
   const post = async () => {
     var form = document.createElement("form");
     form.setAttribute("method", "POST");
@@ -103,7 +103,9 @@ const Order = ({ match }) => {
       form.appendChild(hiddenField);
     }
     document.body.appendChild(form);
-    form.submit();
+    form.submit().then((res) => {
+      console.log(res);
+    });
   };
   return loading ? (
     <Loader />
